@@ -1,0 +1,6 @@
+date,task_category,task_description,baseline_minutes,ai_minutes,rework_minutes_2wk,felt_speed_1to5,measured_multiplier,notes
+2026-07-09,boilerplate,Scaffold Express route + validation,40,18,0,4,2.22,clean win on repetitive setup
+2026-07-09,tests,Unit tests for pricing module,60,35,10,4,1.33,had to fix 2 wrong assertions
+2026-07-10,bugfix_mature,Race condition in scheduler I wrote,90,110,15,3,0.72,felt fast but review + wrong fix cost time
+2026-07-11,docs,README for internal SDK,50,20,0,5,2.50,strong fit for AI
+2026-07-12,novel_design,Design event-sourcing schema,120,130,30,3,0.75,confident suggestions were subtly wrong
