@@ -1,55 +1,72 @@
-# Measuring Your Real AI Productivity Multiplier
+# Measuring Real AI Productivity Gains (Not the 10x Myth)
 
-The LinkedIn post makes a simple point: "10x" is marketing, not measurement. This guide gives you a practical, honest way to measure your *own* multiplier instead of trusting a vibe.
+This guide helps you move past marketing claims and actually measure whether an AI tool improves your workflow. It expands on the post's core argument: the gains are often real but modest, and we are famously bad at judging our own speed.
 
-## Why measure at all?
+## 1. Why "10x" Is Almost Always Wrong
 
-The research cited in the post is worth understanding before you measure:
+### Amdahl's Law in plain terms
+If a task is only part of your workday, speeding up that task can never speed up the whole day more than that portion allows.
 
-- **GitHub Copilot RCT (2023):** In a controlled experiment, developers completed a *single, narrow* task (writing an HTTP server in JavaScript) ~55% faster with Copilot. Real, but narrow.
-- **METR study (2025):** Experienced open-source developers working on their *own* mature repos were measurably *slower* with AI tools — while self-reporting that they felt faster. The perception gap is the core trap.
-- **GitClear churn analysis:** AI-associated code showed materially higher "churn" (lines rewritten or deleted shortly after being committed). More output != more value.
+The formula for overall speedup:
 
-Takeaway: speed on toy tasks doesn't generalize, and your *feeling* of speed is unreliable. So measure.
-
-## The honest measurement method
-
-You don't need a lab. You need a consistent baseline and a log.
-
-### 1. Pick comparable task types
-Group work into categories where AI plausibly helps or hurts:
-- Boilerplate / scaffolding
-- Tests
-- Docs / comments
-- Bug fixing in unfamiliar code
-- Bug fixing in *your own* mature code
-- Novel design / architecture
-
-Measure per category. A single global "multiplier" hides the truth.
-
-### 2. Track time honestly
-For each task record:
-- Estimated time without AI (or a matched historical baseline)
-- Actual wall-clock time with AI, **including** prompt-wrangling, reviewing, and fixing
-- Rework in the following 1-2 weeks (churn)
-
-The most common mistake is counting the fast first draft and ignoring the cleanup.
-
-### 3. Compute the multiplier
 ```
-multiplier = baseline_time / (ai_time + rework_time)
+Speedup_total = 1 / ((1 - P) + (P / S))
 ```
-If it's below 1.0, AI slowed you down for that category. That's a valid, useful finding.
 
-### 4. Watch the perception gap
-After each task, note how fast you *felt* (1-5) alongside the measured time. Over a few weeks you'll see whether your gut tracks reality. Usually it doesn't.
+Where:
+- `P` = fraction of work the tool actually accelerates (0 to 1)
+- `S` = speedup factor on that fraction
 
-## Interpreting results
+**Worked example:** Coding is ~25% of a developer's day (`P = 0.25`). Even if AI made coding *infinitely* fast (`S = ∞`):
 
-- **Tedium (boilerplate, tests, docs):** most people find a genuine win here (often 1.2x-2x).
-- **Mature/complex code you know well:** frequently 0.8x-1.1x. AI suggestions cost more review time than they save.
-- **Churn matters:** if code you shipped fast gets deleted next week, subtract it. Deleted lines are not productivity.
+```
+Speedup_total = 1 / ((1 - 0.25) + 0) = 1 / 0.75 = 1.33x
+```
 
-## The point
+So the theoretical ceiling from perfect coding automation is **1.33x** — not 10x. To 10x a whole workday you would need to accelerate essentially everything by an enormous factor.
 
-A measured 1.3x is more valuable than a marketed 10x, because it's real and it tells you *where* to use the tool. Use the included log template to gather your own numbers.
+### The genre-convention tell
+When unrelated products (proposals, marketing, code) all claim the same round number, it's positioning, not measurement.
+
+## 2. Why Your Own Judgment Is Unreliable
+
+The METR randomized controlled trial (2025) found experienced open-source developers were **~19% slower** with AI tools, despite:
+- Predicting a 24% speedup beforehand
+- Believing they were 20% faster afterward
+
+Lesson: **perceived** productivity and **actual** productivity diverge sharply. Never trust a vibe. Measure.
+
+## 3. How to Actually Measure It
+
+### Pick outcome metrics, not activity metrics
+| Good (outcome) | Misleading (activity) |
+|---|---|
+| PR cycle time (open → merge) | Lines of code written |
+| Time-to-resolve a ticket end to end | Number of AI completions accepted |
+| Rework / revert rate | Characters autocompleted |
+| Review turnaround time | "Feels faster" surveys |
+
+### Run a lightweight A/B on yourself
+1. Choose a repeatable workflow (e.g., "implement a small feature end to end").
+2. For 2 weeks, log wall-clock time per task **without** the tool.
+3. For 2 weeks, log the same **with** the tool.
+4. Compare medians, not means (outliers dominate small samples).
+5. Track a quality metric (bugs, reverts) so speed gains aren't hiding new costs.
+
+### Beware confounds
+- Learning effects: tasks feel faster the second time regardless of tooling.
+- Selection bias: don't only measure tasks the AI is good at.
+- Vendor studies: discount studies published by the tool seller.
+
+## 4. Realistic Expectations
+
+A study of ~300 engineers found ~31.8% faster PR review and close times. That is genuinely material — and it's roughly 1.3x on a specific workflow, consistent with Amdahl's math. Aim for stacking several modest, real gains rather than chasing one mythical 10x.
+
+## 5. Questions to Ask Any Vendor
+- What fraction of my total workflow does this touch?
+- Is the benchmark end-to-end or a cherry-picked subtask?
+- Who funded the study, and was it randomized/controlled?
+- What's the effect on quality and rework, not just speed?
+
+## TL;DR
+Real gains are quieter than the marketing. Use Amdahl's Law to sanity-check claims, measure outcomes not activity, and don't trust your own sense of speed — it's demonstrably biased optimistic.
