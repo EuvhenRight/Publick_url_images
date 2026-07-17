@@ -1,62 +1,70 @@
-# Evaluating Autonomous AI in High-Stakes Domains: A Practical Guide
+# Who Regulates Human Enhancement? A Reader's Fact-Check Guide
 
-This guide turns the philosophical question from the post — *"What standard would you want a system measuring your own mind against?"* — into a concrete evaluation framework you can apply when deploying autonomous AI agents in high-stakes settings (healthcare, finance, legal, safety).
-
-## Why this matters
-
-The headline claim ("5 agents, 3,300 notes, 90%+ of expert accuracy, no human supervision") is impressive but incomplete. "90% of expert accuracy" tells you almost nothing without answers to the questions below. This guide gives you the checklist and the math to interrogate such claims responsibly.
+This guide unpacks the claims in the post so you can evaluate them yourself, separates rhetoric from evidence, and gives you a framework for thinking about the regulation of cognitive enhancement technologies.
 
 ---
 
-## 1. Interrogate the headline metric
+## 1. The claims, checked
 
-"Matched 90% of expert accuracy" can mean many different things. Before trusting it, pin down:
+### Claim: "BCIs have less regulatory oversight than cough syrup."
 
-- **Baseline definition**: Whose expertise is the reference? Single clinician, consensus panel, or a downstream ground-truth (e.g., confirmed diagnosis years later)?
-- **Metric choice**: Accuracy is misleading for rare conditions. If only 8% of notes show cognitive decline, a model that always says "no decline" is 92% accurate and 100% useless.
-- **Prevalence-aware metrics**: Prefer sensitivity/recall, specificity, PPV, NPV, and AUROC/AUPRC.
+**Partly rhetorical, partly true.**
 
-## 2. Cost of each error type is asymmetric
+- In the US, **invasive** BCIs (implanted, wiring into cortex) are regulated by the FDA as **Class III medical devices** — the strictest tier. Devices like Neuralink's implant proceed under an **Investigational Device Exemption (IDE)** and require clinical trials. This is *not* lighter than a drug's oversight.
+- **Non-invasive** consumer neurotech (EEG headbands, "focus" wearables, tDCS gadgets) often ships as **consumer wellness products**, escaping medical-device review entirely. This is where the "less oversight than cough syrup" barb actually lands.
+- The post blurs these two categories. The provocative framing works only if you conflate a wellness headband with a cortical implant.
 
-In cognitive-decline screening:
+**Takeaway:** The regulatory gap is real but lives mostly in the *consumer wellness* lane, not the implant lane.
 
-| Error | Consequence |
-|-------|-------------|
-| False negative | Missed early intervention window; harm to patient |
-| False positive | Anxiety, unnecessary testing, cost, potential stigma |
+### Claim: "IQ climbed ~3 points/decade for a century, then several developed countries lost points after the mid-90s."
 
-A single "accuracy" number hides this trade-off. Always request a confusion matrix and the operating threshold.
+**Broadly supported, with caveats.**
 
-## 3. The "patient out of the room" problem
+- The rise is the **Flynn effect** (James Flynn), well documented across the 20th century — roughly 3 points/decade on standardized tests.
+- A **reverse Flynn effect** has been reported in Norway, Denmark, Finland, France, and the UK, generally from cohorts born after the mid-1970s (measured in the 1990s–2000s). Notable study: Bratsberg & Rogeberg (2018, PNAS) on Norwegian conscripts — showing the decline is *within families*, arguing against purely genetic/immigration explanations.
+- **Caveats:** Effect sizes are small, trends vary by country, and "IQ" measures test performance, not a fixed biological quantity. Causes are debated (education style, media habits, test-taking familiarity, measurement artifacts).
 
-Autonomy is not free. Ask:
+**Takeaway:** Directionally accurate. Don't overstate magnitude or assume a single cause.
 
-- **Consent**: Did the subject agree to an autonomous verdict, or only to research?
-- **Contestability**: Can a person see, question, and appeal the output?
-- **Accountability**: When the system is wrong, who is responsible?
-- **Disclosure**: Is the human told a machine made the assessment?
+### Claim: "Nobody signed off on either."
 
-"Completely autonomous" and "cheaper because you don't need a human" are engineering wins that can be governance failures if these questions are unanswered.
-
-## 4. Distribution & generalization
-
-- Was validation on a held-out set from the *same* hospital, or external sites?
-- Demographic subgroup performance (age, race, language, comorbidities)?
-- Temporal drift: notes change as clinical documentation practices change.
-
-## 5. A minimal deployment gate
-
-Before any autonomous high-stakes deployment, require:
-
-1. Pre-registered metrics with prevalence-adjusted thresholds.
-2. Subgroup performance tables (no single aggregate number).
-3. A human-in-the-loop escalation path for borderline cases.
-4. Continuous monitoring with drift alarms.
-5. An explicit, published definition of "better" — the post's core point: *we shipped before agreeing what better means.*
+**Rhetorical.** No one "signs off" on population-level cognitive trends — they're emergent, not decided. The line is a framing device, not a factual claim.
 
 ---
 
-## Companion files
+## 2. How enhancement tech is actually regulated (quick map)
 
-- `evaluation.ts` — runnable TypeScript showing why "90% accuracy" can be worthless and how to compute honest metrics.
-- `prompt.md` — a reusable prompt for auditing vendor/research claims about autonomous AI systems.
+| Category | Example | US pathway | Rigor |
+|---|---|---|---|
+| Small-molecule drug | Cough syrup, nootropic Rx | NDA + clinical trials | High |
+| Gene editing (somatic) | CRISPR therapies | BLA/IND, FDA + often RAC-style ethics review | Very high |
+| Invasive BCI | Cortical implant | Class III, IDE, clinical trials | Very high |
+| Non-invasive medical BCI | Stroke rehab EEG | Class II (510(k) or De Novo) | Moderate |
+| Consumer neurotech | Focus headband, tDCS kit | Wellness/general consumer | Low to none |
+
+**The honest version of the post's thesis:** the gap isn't "implants vs. cough syrup," it's **consumer wellness neurotech vs. everything with a medical claim.**
+
+---
+
+## 3. A question framework for evaluating any enhancement product
+
+Use this checklist before believing a "upgrade your brain" pitch:
+
+1. **Claim class** — Does it make a medical claim (treat/diagnose) or a wellness claim ("support focus")? Wellness claims dodge most review.
+2. **Evidence tier** — Peer-reviewed RCTs? Preprints? Testimonials? Nothing?
+3. **Reversibility** — Can you stop and return to baseline (headband) or not (implant, gene edit)?
+4. **Failure mode** — What's the worst outcome if it malfunctions?
+5. **Data flow** — Neural/behavioral data collected? Who owns it? Sold?
+6. **Oversight body** — Which regulator, if any, reviewed it? Under what pathway?
+7. **Conflict of interest** — Who funded the studies cited?
+
+---
+
+## 4. Sources to verify yourself
+
+- Bratsberg & Rogeberg (2018), "Flynn effect and its reversal are both environmentally caused," *PNAS*.
+- Flynn, J. R. (2007), *What Is Intelligence?*
+- FDA guidance: "Implanted Brain-Computer Interface (BCI) Devices for Patients with Paralysis or Amputation" (2021).
+- Dumit & others on neuro-ethics literature.
+
+*Always trace a punchy statistic back to its primary source before repeating it.*
