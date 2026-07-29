@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Div Centering Cheat Sheet — Runnable Examples</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem; background: #f6f7f9; }
+  h2 { margin-top: 2rem; }
+  .demo {
+    height: 160px;
+    border: 2px dashed #94a3b8;
+    border-radius: 8px;
+    background: #fff;
+    margin-bottom: 0.5rem;
+  }
+  .btn {
+    padding: 0.6rem 1.2rem;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  code { background: #eef2ff; padding: 0.1rem 0.3rem; border-radius: 4px; }
+
+  /* Method 1: flexbox */
+  .flex { display: flex; justify-content: center; align-items: center; }
+
+  /* Method 2: grid */
+  .grid { display: grid; place-items: center; }
+
+  /* Method 3: absolute + transform */
+  .abs { position: relative; }
+  .abs .btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* Method 4: margin auto (horizontal only) */
+  .margin-auto .btn { display: block; margin-inline: auto; margin-top: 1rem; }
+</style>
+</head>
+<body>
+  <h1>Center a &lt;div&gt; (or a button) — every reliable way</h1>
+  <p>Open this file in any browser. Each box uses a different technique.</p>
+
+  <h2>1. Flexbox — both axes</h2>
+  <code>display:flex; justify-content:center; align-items:center;</code>
+  <div class="demo flex"><button class="btn">Centered</button></div>
+
+  <h2>2. Grid — both axes (shortest)</h2>
+  <code>display:grid; place-items:center;</code>
+  <div class="demo grid"><button class="btn">Centered</button></div>
+
+  <h2>3. Absolute + transform (for overlays/modals)</h2>
+  <code>position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);</code>
+  <div class="demo abs"><button class="btn">Centered</button></div>
+
+  <h2>4. margin-inline:auto — horizontal only</h2>
+  <code>display:block; margin-inline:auto;</code>
+  <div class="demo margin-auto"><button class="btn">Horizontally centered</button></div>
+</body>
+</html>
