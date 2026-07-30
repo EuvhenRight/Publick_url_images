@@ -1,0 +1,58 @@
+# Example hardened GitHub Actions workflow.
+# Demonstrates the preventive controls described in guide.md.
+# Adapt endpoints and steps to your own project.
+
+name: build-hardened
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Least-privilege default for the whole workflow.
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read        # override per-job if a step needs more
+      id-token: write        # only if using OIDC for cloud/registry auth
+    steps:
+      # Pin to a full commit SHA, not a mutable tag.
+      # Replace the SHA below with the current pinned commit for actions/checkout@v4.
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Setup Node
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # Install dependencies WITHOUT running lifecycle scripts.
+      # This neutralizes malicious postinstall payloads like the Shai-Hulud worm.
+      # Use a lockfile + integrity check; fail if lockfile is out of date.
+      - name: Install (no scripts)
+        run: npm ci --ignore-scripts
+
+      # If a specific trusted package genuinely needs its build step,
+      # rebuild only that package explicitly and audited:
+      # - name: Rebuild trusted native deps
+      #   run: npm rebuild <trusted-package>
+
+      - name: Audit dependencies
+        run: npm audit --audit-level=high || true # report, do not silently pass in prod
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Test
+        run: npm test --if-present
+
+# Recommended companion controls (configured outside this file):
+# - Egress network monitoring/blocking on the runner (agent or network policy).
+# - Dependency review action on pull_request events.
+# - Repo-level secret scanning + push protection.
+# - OIDC-based short-lived credentials instead of static registry/cloud secrets.
