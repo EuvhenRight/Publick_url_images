@@ -1,91 +1,87 @@
-# Comparing heat deaths and gun deaths without misleading readers
+# Raw Totals vs. Rates: A Quick Data-Literacy Guide
 
-This guide explains how to interpret the claim that estimated heat-related deaths in Europe can exceed counted gun-related deaths in the United States.
+This guide supports the LinkedIn post about comparing European heat deaths with U.S. gun deaths. The main lesson: a true number can still be misleading if it answers the wrong question.
 
-## The short version
+## The core issue
 
-The comparison is attention-grabbing, but the two numbers are not built the same way.
+A raw total answers:
 
-- **Europe heat deaths:** usually estimated statistically from excess mortality during hot periods.
-- **U.S. gun deaths:** counted from death certificates and classified by intent, such as suicide, homicide, accident, or legal intervention.
+> How many events happened?
 
-That does not make the comparison useless. It means the comparison should be framed as a public-health perspective, not as a like-for-like accounting exercise.
+A rate answers:
 
-## Example figures from the post
+> How common is the event relative to the population at risk?
 
-| Measure | Figure | Geography | Period | Method |
-|---|---:|---|---|---|
-| Heat-related deaths | 61,672 | Europe | Summer 2022 | Modeled estimate of deaths attributable to heat |
-| Gun-related deaths | 44,447 | United States | 2024 | Death-certificate count using CDC data, as reported by Pew Research Center |
+If two regions have different population sizes, raw totals alone are usually a weak basis for comparing individual risk.
 
-## Why the numbers are different kinds of evidence
+## Example framing
 
-### 1. Heat deaths are often estimated, not individually certified
+Suppose we compare:
 
-Heat can worsen cardiovascular, respiratory, renal, and other conditions. A death certificate may list heart disease, respiratory failure, or another immediate cause without listing heat as the underlying cause.
+- European heat deaths: 50,000 to 68,000 per year
+- U.S. gun deaths: 46,728 per year
 
-Because of that, researchers often estimate heat mortality by comparing observed deaths during hot periods with expected deaths under cooler baseline conditions. This is commonly called an **attributable mortality** or **excess mortality** approach.
+The raw totals are close enough that someone might say:
 
-### 2. Gun deaths are counted event by event
+> More people die from heat in Europe than from guns in America.
 
-U.S. firearm mortality is usually counted from death certificates. These deaths are coded using standard mortality classifications and can be grouped by intent:
+That statement may be numerically true depending on the year, geography, and source definitions. But it does not automatically mean a person in Europe faces a higher annual death risk from heat than a person in the U.S. faces from guns.
 
-- suicide
-- homicide
-- unintentional injury
-- legal intervention
-- undetermined intent
+To answer the risk question, we need a denominator.
 
-This makes firearm deaths more direct as a count, although there can still be classification and reporting issues.
+## Use deaths per 100,000 people
 
-### 3. Absolute totals are not the same as risk
+A common comparison is:
 
-Europe has a larger population than the United States. If comparing public-health burden, absolute deaths matter for emergency planning, but per-capita rates are also important.
+```text
+rate per 100,000 = deaths / population * 100,000
+```
 
-A rough way to contextualize the post’s figures:
+For example, if a European population base is about 540 million and the U.S. population is about 335 million:
 
-- 61,672 heat deaths across Europe is a large absolute burden.
-- 44,447 U.S. firearm deaths is also a large burden.
-- Per-capita comparisons may change the interpretation depending on which European population denominator is used.
+```text
+50,000 European heat deaths / 540,000,000 * 100,000 ≈ 9.3 per 100,000
+68,000 European heat deaths / 540,000,000 * 100,000 ≈ 12.6 per 100,000
+46,728 U.S. gun deaths / 335,000,000 * 100,000 ≈ 13.9 per 100,000
+```
 
-## A fair wording template
+With those illustrative denominators, the per-capita comparison looks different from the raw-total comparison.
 
-Use wording like this:
+## Questions to ask before accepting the chart
 
-> One study estimated about 61,672 heat-related deaths in Europe during summer 2022, while Pew Research Center reported 44,447 U.S. gun deaths in 2024 using CDC records. These are not identical measures: heat deaths are modeled from excess mortality, while gun deaths are counted from death certificates. Still, the comparison highlights that extreme heat is a major public-safety threat, not merely uncomfortable weather.
+1. **Compared to what?**  
+   Is the claim comparing totals, rates, risks, trends, or policy outcomes?
 
-## What to avoid
+2. **What is the population denominator?**  
+   Europe can mean the EU, the WHO European Region, continental Europe, or a study-specific set of countries. Each has a different population.
 
-Avoid saying:
+3. **Are the time windows aligned?**  
+   Are both numbers from the same year or comparable multi-year averages?
 
-> Heat killed more Europeans than guns killed Americans, therefore heat is objectively the bigger danger.
+4. **Are the event definitions comparable?**  
+   Gun deaths may include homicide, suicide, accidents, and legal intervention depending on the source. Heat deaths may be directly certified deaths or statistically estimated excess deaths attributable to heat.
 
-That overstates the comparison because it ignores:
+5. **Is age structure relevant?**  
+   Heat mortality is strongly age-sensitive. Age-adjusted rates may be needed for deeper comparisons.
 
-- different geographies
-- different years
-- different population sizes
-- modeled estimates versus counted deaths
-- different policy levers and prevention strategies
+6. **Is the intended question about individual risk, public-health burden, or policy priority?**  
+   Raw counts can matter for system capacity and total burden. Rates are usually better for comparing risk across populations.
 
-## Better questions to ask
+## Better dashboard pattern
 
-For a city or region, the more useful policy questions are:
+Instead of showing only raw totals, show both:
 
-1. How many residents are at high risk during heat waves?
-2. Which neighborhoods lack tree cover, air conditioning, or safe cooling access?
-3. How many firearm injuries and deaths occur locally, and among whom?
-4. What interventions have the strongest local evidence?
-5. What is the cost per prevented death, hospitalization, or injury?
-6. Are there near-term actions that reduce both risks, such as outreach to isolated older adults, housing upgrades, and emergency-response planning?
+| Metric | Why it matters |
+|---|---|
+| Total deaths | Shows total burden and scale |
+| Deaths per 100,000 people | Shows population-adjusted risk |
+| Time trend | Shows whether risk is rising or falling |
+| Definition/source note | Prevents false precision |
 
-## Suggested sources to check
+## Reusable rule
 
-- Nature Medicine heat-mortality study: Ballester et al., “Heat-related mortality in Europe during the summer of 2022,” Nature Medicine, 2023.
-- Pew Research Center firearm-death summaries using CDC records.
-- CDC WONDER or CDC provisional mortality data for U.S. firearm deaths.
-- Local health department heat action plans and climate adaptation reports.
+When a chart compares places of different sizes, ask:
 
-## Bottom line
+> Where is the denominator?
 
-The comparison is useful if treated as a signal: extreme heat is a large, preventable public-health threat. It becomes misleading only if presented as a clean apples-to-apples ranking of dangers.
+If the denominator is missing, the chart may still be factually correct — but analytically incomplete.
